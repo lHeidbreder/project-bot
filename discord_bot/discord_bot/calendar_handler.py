@@ -3,8 +3,8 @@ import pickle
 from pathlib import Path
 from os import mkdir
 
-dzs = None
-NAME = None
+dzs = 2021042914342000
+NAME = Silvia
 dateDictionary = {}
 date = dzs[0:8]
 times = dzs[8:16]
