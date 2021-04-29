@@ -310,3 +310,7 @@ def __TryParseInteger(string:str) -> (bool, int):
         pass
 
     return worked, result
+
+print(rollDice("-4d-10"))
+print(rollDice("-d"))
+print(rollDice("4d-5"))
