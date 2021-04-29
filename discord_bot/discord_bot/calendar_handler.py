@@ -82,6 +82,6 @@ def checkFreeOn(key):
         if min(endTimes) < max(startTimes):
             return 288, []
         else:
-            return 201, [[freePeople],[max(startTimes), min(endTimes)]]
+            return 201, [freePeople,[max(startTimes), min(endTimes)]]
     else:
         return 277, []
