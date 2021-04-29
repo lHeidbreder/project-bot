@@ -1,12 +1,10 @@
-#needed: NAME
-#needed: datums- und zeitstring in yyyymmddhhMMhhMM as dzs
-
 import datetime
 import pickle
 from pathlib import Path
 from os import mkdir
 
 dzs = None
+NAME = None
 dateDictionary = {}
 date = dzs[0:8]
 times = dzs[8:16]
