@@ -5,13 +5,15 @@ def printDiceValue(username:str, arg:[str]):
 
 def printDate(username:str, arg:[str]):
     namen = ""
+    time = ""
 
-    for x in arg[1]:
+    for x in arg[0]:
         namen = namen + x + ", "
 
-    ausgabe = namen + "haben am " + arg[0] + " um " + arg[2] + " Zeit."
+    time = arg[1][0] + " bis " + arg[1][1]
+  
+    ausgabe = namen + "haben von " + time + " Zeit."
     
-    print(ausgabe)
     return ausgabe
 
 def printDateWasCorrect(username:str, arg:[str]):
@@ -63,9 +65,3 @@ def printHelp(username:str, arg:[str]):
     """
     
     return ausgabe
-
-printDate("", ["10.02.2015", ["Thomas", "Silvia", "Tom"], "12:00 - 15:30"])
-printDiceValue("TD", ["2"])
-printFormatError("", ["1"])
-printNoDiceError("", [])
-printHelp("", [])
