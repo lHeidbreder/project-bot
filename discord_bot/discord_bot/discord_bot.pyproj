@@ -27,10 +27,9 @@
     <Compile Include="calendar_handler.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="class1.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="discord_bot.py" />
+    <Compile Include="logger.py" />
+    <Compile Include="roll_handler.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="logs\" />

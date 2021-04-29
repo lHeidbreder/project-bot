@@ -1,6 +1,6 @@
 import discord
 from logger import Logger
-import roll_handler
+import roll_handler, ausgabe, calendar_handler
 
 client = discord.Client()
 Logger.default_log_level = Logger.LOG_LEVEL_WARNING
@@ -38,12 +38,14 @@ def change_log_level(message : discord.Message):
 
 def help(message : discord.Message):
     """
+    Note: inactive!
     Outputs the help dialogue for the desired subject.
     """
     subject = message.content.split(" ", 2)
 
     help_subjects = {
-        
+        "roll": ausgabe.printHelp,
+        "calendar": None
         }
     try:
         return help_subjects[subject]
@@ -56,20 +58,21 @@ def roll(message : discord.Message):
     """
     rtn = roll_handler.rollDice(message.content.split(" ",2)[1].strip())
     if rtn[0] != 100:
-        log.warning(roll_handler.exitCodes[rtn[0]])
+        log.warning(message.content + "\n" + roll_handler.exitCodes[rtn[0]])
 
-    #TODO:
     output_calls = {
-       
+       100: ausgabe.printDiceValue,
+       110: ausgabe.printFormatError,
+       111: ausgabe.printNoDiceError
     }
     rtn = output_calls[rtn[0]](str(message.author),rtn[1])
 
     return rtn
 
-def calendar_add(message : discord.Message):
+def who_free(message : discord.Message):
     pass
 
-def calendar_request(message : discord.Message):
+def when_free(message : discord.Message):
     pass
 
 ## SDNAMMOC ##
@@ -86,18 +89,19 @@ async def on_ready():
 
 @client.event
 async def on_message(message : discord.Message):
-    if message.author == client.user or not message.content.startswith('$'):
+    if message.author == client.user or not message.content.startswith(entry_sign):
         return
 
     command_map = {
         "$loglevel": change_log_level,
         "$help": help,
-        "$roll": roll
+        "$roll": roll,
+        "$freeon": who_free,
+        "$freetimes": when_free
         }
 
     try:
         msg = command_map[message.content.split[1].lower()](message)
-        #msg = output call
     except Exception:
         pass
 

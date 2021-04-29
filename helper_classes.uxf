@@ -43,7 +43,7 @@
 -
 +ExitCode(code:int,msg:string)
 +get_code(): int
-+get_msg(): int</panel_attributes>
++get_msg(): string</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
