@@ -11,6 +11,7 @@ times = dzs[8:16]
 
 exitCodes = {
     200: "Eingegebenes Datum ist ok.",
+    201: "Eingabe ok.",
     222: "Eingegebenes Datum ist nicht ok.",
     277: "Datum ist nicht im Dictionary. Niemand hat für dieses Datum eine freie Zeit angegeben.",
     288: "Kleinste Endzeit ist früher als späteste Anfangszeit. Keine freie Zeit verfügbar."
@@ -66,16 +67,11 @@ def inputRoutine(msgNAME, msg):
     return 200, []
 
 
-def checkWhoIsFreeOn(key):
+def checkFreeOn(key):
     global timeDictionary
     freePeople = []
     for el in timeDictionary[key].keys():
         freePeople.append(el)
-    return freePeople
-
-
-def checkFreeTimesOn(key):
-    global timeDictionary
     startTimes = []
     endTimes = []
     for value in timeDictionary[key].values():
@@ -86,6 +82,6 @@ def checkFreeTimesOn(key):
         if min(endTimes) < max(startTimes):
             return 288
         else:
-            return "Free play time from " + max(startTimes) + " to " + min(endTimes) + "."
+            return 201, [[freePeople],[max(startTimes), min(endTimes)]]
     else:
         return 277
