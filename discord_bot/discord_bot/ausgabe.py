@@ -62,4 +62,3 @@ printDiceValue("TD", ["2"])
 printFormatError("", ["1"])
 printNoDiceError("", [])
 printHelp("", [])
-
