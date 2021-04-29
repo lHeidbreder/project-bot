@@ -80,8 +80,8 @@ def checkFreeOn(key):
         endTimes.append(value[4:8])
     if key in timeDictionary.keys():
         if min(endTimes) < max(startTimes):
-            return 288
+            return 288, []
         else:
             return 201, [[freePeople],[max(startTimes), min(endTimes)]]
     else:
-        return 277
+        return 277, []
