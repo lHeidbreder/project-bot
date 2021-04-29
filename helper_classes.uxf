@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>30</y>
+      <w>300</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>Logger
+-
++LOG_LEVEL_FINE: int=0 {readonly}
++LOG_LEVEL_CONFIG: int=1 {readonly}
++LOG_LEVEL_WARNING: int=2 {readonly}
++LOG_LEVEL_SEVERE: int=3 {readonly}
+-log_level: int
+-log_location: Path
+-
++Logger(path:Path)
++write(level:int, msg:string)
++isLoggable(level:int): bool
++fine(msg:string)
++config(msg:string)
++warning(msg:string)
++severe(msg:string)
++set_log_level(level:int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>30</y>
+      <w>210</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>ExitCode
+-
+-code: int
+-msg: string
+-
++ExitCode(code:int,msg:string)
++get_code(): int
++get_msg(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
