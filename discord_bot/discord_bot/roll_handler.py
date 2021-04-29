@@ -8,14 +8,12 @@
 """
 
 import random
-from logger import Logger
+#from logger import Logger
 
 #Exit codes (for documentation only)
-exitCodes = {
-    100 : "Dice string has been successfully interpreted. Izi snack!",
-    110 : "Dice string has formatting error at index.",
-    111 : "Dice string did not contain any dice."
-             }
+exitCodes = { 100 : "Dice string has been successfully interpreted. Izi snack!",
+              110 : "Dice string has formatting error at index.",
+              111 : "Dice string did not contain any dice." }
 
 def rollDice(msg:str) -> (int, [str]):
     """
@@ -51,16 +49,23 @@ def rollDice(msg:str) -> (int, [str]):
             diceValues.append(__testForCorrectDiceSyntax(diceStringList[i]))
 
             #break if dice had wrong syntax
+            if(diceValues[i][1]):
+                pass
             if(not diceValues[i][0]):
                 return 110, [str(i)]
 
         #all dice had correct syntax, add them together
         for i in range(0, diceAmount):
-            diceValues[i] = __throwDice(diceValues[i][1], diceValues[i][2])
+            if(diceValues[i][1]): #is an literal
+                diceValues[i]= diceValues[i][3]
+            else:
+                diceValues[i] = __throwDice(diceValues[i][2], diceValues[i][3])
+
+        print("\t" + str(diceValues))
+        print("\t" + str(operandList))
 
         calculatedResult = __calculateDiceResult(diceValues, operandList)
-        print(calculatedResult)
-        return 100, calculatedResult
+        return 100, [calculatedResult]
     else:
         return 111, []
 
@@ -164,7 +169,7 @@ def __findNextOperand(msg:str)-> (int, str):
     plus = msg.find("+")
 
     #test, if spaces and pluses are found both
-    if(space > 0 and plus > 0):
+    if(space >= 0 and plus >= 0):
         if(space > plus):
             plus = space
     elif(space > plus):
@@ -175,22 +180,22 @@ def __findNextOperand(msg:str)-> (int, str):
     operandIndex = -1
 
     #test for minus and plus and which comes first
-    if(minus > 0 and plus > 0):
+    if(minus >= 0 and plus >= 0):
         if(minus < plus):
             operand = "-"
             operandIndex = minus
         else:
             operand = "+"
             operandIndex = plus
-    elif(minus < 0 and plus > 0):
+    elif(minus < 0 and plus >= 0):
         operand = "+"
         operandIndex = plus
-    elif(minus > 0 and plus < 0):
+    elif(minus >= 0 and plus < 0):
         operand = "-"
         operandIndex = minus
 
     return operandIndex, operand
-def __testForCorrectDiceSyntax(dice:str) -> (bool, int, int):
+def __testForCorrectDiceSyntax(dice:str) -> (bool, bool, int, int):
     """
     Tests for the correct dice syntax
 
@@ -203,12 +208,18 @@ def __testForCorrectDiceSyntax(dice:str) -> (bool, int, int):
     -------
     (bool, int, int)
         The first value indicates wether it is a correctly formatted string or not. If false, all other values are -1.
-        The second value indicates how often the die should be thrown.
-        The third value indicates the sides of the die, meaning the max value that can be thrown using that dice.
+        The second value indicates wether the value is an literal.
+        The third value indicates how often the die should be thrown.
+        The fourth value indicates the sides of the die, meaning the max value that can be thrown using that dice.
     """
-    #test, if there is a "d" in the string, otherwise return false
+    #test, if there is a "d" in the string. If not, it could be an literal or wrongly formatted
+    result = ()
+
     if(dice.find("d") < 0):
-        return False, -1, -1
+        integerParse = __TryParseInteger(dice)
+        if (integerParse[0]):
+            return True, True, -1, integerParse[1]
+        return False, False, -1, -1
 
     diceStringParts = dice.split("d")
     diceStringPartsLength = len(diceStringParts)
@@ -216,7 +227,7 @@ def __testForCorrectDiceSyntax(dice:str) -> (bool, int, int):
     #test, if there are enouth parts
     if(diceStringPartsLength < 0 or diceStringPartsLength > 2):
         #dice string either had to many or to few parts
-        return False, -1, -1
+        return False, False, -1, -1
 
     #count, how many spaces are empty
     spaceCounter = 0;
@@ -234,7 +245,7 @@ def __testForCorrectDiceSyntax(dice:str) -> (bool, int, int):
     for i in range(0, len(diceStringParts)):
         if(not __TryParseInteger(diceStringParts[i])[0]):
             #could not convert to integer
-            return False, -1, -1
+            return False, False, -1, -1
 
     #placeholder variables for left and right side of each dice statement
     diceValue1 = 1
@@ -249,7 +260,7 @@ def __testForCorrectDiceSyntax(dice:str) -> (bool, int, int):
         diceValue1 = __ParseInteger(diceStringParts[0])
         diceValue2 = __ParseInteger(diceStringParts[1])
 
-    return True, diceValue1, diceValue2
+    return True, False, diceValue1, diceValue2
 
 #help methods
 def __ParseInteger(string:str) -> int:
@@ -270,8 +281,9 @@ def __ParseInteger(string:str) -> int:
     try:
         result = int(string)
     except:
-        log = Logger.get_instance()
-        log.severe("Couldn't convert" + string + "to integer in \"ParseInteger(string:str) -> int\"")
+        #log = Logger.get_instance()
+        #log.severe("Couldn't convert" + string + "to integer in \"ParseInteger(string:str) -> int\"")
+        pass
     return result
 def __TryParseInteger(string:str) -> (bool, int):
     """
