@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>083a707f-c54a-4151-acaf-b967d1b1a419</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>discord_bot.py</StartupFile>
+    <StartupFile>ausgabe.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ausgabe.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="calendar_handler.py">
       <SubType>Code</SubType>
     </Compile>
