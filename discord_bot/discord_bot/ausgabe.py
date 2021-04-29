@@ -5,13 +5,20 @@ def printDiceValue(username:str, arg:[str]):
 
 def printDate(username:str, arg:[str]):
     namen = ""
+    time = ""
 
-    for x in arg[1]:
+    for x in arg[0]:
         namen = namen + x + ", "
 
-    ausgabe = namen + "haben am " + arg[0] + " um " + arg[2] + " Zeit."
+    time = arg[1][0] + " bis " + arg[1][1]
+  
+    ausgabe = namen + "haben von " + time + " Zeit."
     
-    print(ausgabe)
+    return ausgabe
+
+def printDateWasCorrect(username:str, arg:[str]):
+    ausgabe = "Eingabe von " + username + " war korrekt."
+
     return ausgabe
 
 def printFormatError(username:str, arg:[str]):
@@ -46,6 +53,8 @@ def printHelp(username:str, arg:[str]):
     Wenn man vor dem d keine Zahl schreibt, wird von einem Würfel ausgegangen.
     Wenn man hinter dem d keine Zahl schreibt, wird von einem sechseitigem Würfel ausgegangen.
 
+    Man kann auch Ganzzahlen wie z.B. 5 oder 23 eingeben statt einem Würfelelement.
+
     ______________________
     Würfel addieren und subtrahieren:
 
@@ -56,4 +65,3 @@ def printHelp(username:str, arg:[str]):
     """
     
     return ausgabe
-
