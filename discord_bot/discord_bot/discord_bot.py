@@ -56,7 +56,7 @@ def roll(message : discord.Message):
     """
     Makes a roll request and returns its result.
     """
-    rtn = roll_handler.rollDice(message.content.split(" ",2)[1].strip())
+    rtn = roll_handler.rollDice(message.content.split(" ",1)[1].strip())
     if rtn[0] != 100:
         log.warning(message.content + "\n" + roll_handler.exitCodes[rtn[0]])
 
@@ -69,10 +69,10 @@ def roll(message : discord.Message):
 
     return rtn
 
-def who_free(message : discord.Message):
+def free_request(message : discord.Message):
     pass
 
-def when_free(message : discord.Message):
+def free_input(message : discord.Message):
     pass
 
 ## SDNAMMOC ##
@@ -96,8 +96,8 @@ async def on_message(message : discord.Message):
         "$loglevel": change_log_level,
         "$help": help,
         "$roll": roll,
-        "$freeon": who_free,
-        "$freetimes": when_free
+        "$freeon": free_request,
+        "$freetimes": free_input
         }
     try:
         msg = command_map[message.content.split()[0].lower()](message)
