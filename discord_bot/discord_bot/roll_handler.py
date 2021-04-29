@@ -8,7 +8,7 @@
 """
 
 import random
-#from logger import Logger
+from logger import Logger
 
 #Exit codes (for documentation only)
 exitCodes = { 100 : "Dice string has been successfully interpreted. Izi snack!",
@@ -60,9 +60,6 @@ def rollDice(msg:str) -> (int, [str]):
                 diceValues[i]= diceValues[i][3]
             else:
                 diceValues[i] = __throwDice(diceValues[i][2], diceValues[i][3])
-
-        print("\t" + str(diceValues))
-        print("\t" + str(operandList))
 
         calculatedResult = __calculateDiceResult(diceValues, operandList)
         return 100, [calculatedResult]
@@ -281,9 +278,8 @@ def __ParseInteger(string:str) -> int:
     try:
         result = int(string)
     except:
-        #log = Logger.get_instance()
-        #log.severe("Couldn't convert" + string + "to integer in \"ParseInteger(string:str) -> int\"")
-        pass
+        log = Logger.get_instance()
+        log.severe("Couldn't convert" + string + "to integer in \"ParseInteger(string:str) -> int\"")
     return result
 def __TryParseInteger(string:str) -> (bool, int):
     """
@@ -310,7 +306,3 @@ def __TryParseInteger(string:str) -> (bool, int):
         pass
 
     return worked, result
-
-print(rollDice("-4d-10"))
-print(rollDice("-d"))
-print(rollDice("4d-5"))
