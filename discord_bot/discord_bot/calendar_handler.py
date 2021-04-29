@@ -24,15 +24,15 @@ if not saves_path.exists() or not saves_path.is_dir():
 
 def checkTimeInput(dzs):
     if dzs.isdecimal():
-        if datetime.today().year == int(dzs[0:4]):
-            if datetime.today().month == int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
-                if datetime.today().day <= int(dzs[6:8]) and int(dzs[6:8]) <= 31:
+        if datetime.date.today().year == int(dzs[0:4]):
+            if datetime.date.today().month == int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
+                if datetime.date.today().day <= int(dzs[6:8]) and int(dzs[6:8]) <= 31:
                     return 200
             else:
-                if datetime.today().month < int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
+                if datetime.date.today().month < int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
                     return 200
         else:
-            if datetime.today().year < int(dzs[0:4]) and datetime.today().month >= int(dzs[4:6]) and int(dzs[6:8]) <= 31:
+            if datetime.date.today().year < int(dzs[0:4]) and datetime.date.today().month >= int(dzs[4:6]) and int(dzs[6:8]) <= 31:
                 return 200
             else:
                 return 222
