@@ -1,10 +1,10 @@
 import discord
 from logger import Logger
-import roll_handler, ausgabe, calendar_handler
+import roll_handler, ausgabe#, calendar_handler
 
 client = discord.Client()
-Logger.default_log_level = Logger.LOG_LEVEL_WARNING
-log = Logger.get_instance()
+#Logger.default_log_level = Logger.LOG_LEVEL_WARNING
+log = Logger.get_instance(Logger.LOG_LEVEL_WARNING)
 entry_sign = '$'
 
 
@@ -99,15 +99,14 @@ async def on_message(message : discord.Message):
         "$freeon": who_free,
         "$freetimes": when_free
         }
-
     try:
-        msg = command_map[message.content.split[1].lower()](message)
-    except Exception:
-        pass
+        msg = command_map[message.content.split()[0].lower()](message)
+        if msg != None:
+            await message.channel.send(msg)
+    except Exception as e:
+        await message.channel.send(str(e))
 
-    if msg != None:
-        await message.channel.send(msg)
-
+    
 ## STNEVE ##
 
 

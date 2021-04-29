@@ -62,7 +62,7 @@ def rollDice(msg:str) -> (int, [str]):
                 diceValues[i] = __throwDice(diceValues[i][2], diceValues[i][3])
 
         calculatedResult = __calculateDiceResult(diceValues, operandList)
-        return 100, [calculatedResult]
+        return 100, [str(calculatedResult)]
     else:
         return 111, []
 

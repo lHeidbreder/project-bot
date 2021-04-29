@@ -1,10 +1,11 @@
 import pathlib, datetime, os
 
+_instance = None
+
+
 class Logger:
     
-    __instance = None
-    default_log_level = 0
-
+    
     LOG_LEVEL_FINE = 0
     LOG_LEVEL_CONFIG = 1
     LOG_LEVEL_WARNING = 2
@@ -47,7 +48,8 @@ class Logger:
 
 
     @staticmethod
-    def get_instance():
-        if __instance == None:
-            __instance = Logger(__default_log_level)
-        return __instance
+    def get_instance(lvl):
+        global _instance
+        if _instance == None:
+            _instance = Logger(lvl)
+        return _instance

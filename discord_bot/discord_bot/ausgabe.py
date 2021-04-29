@@ -57,8 +57,3 @@ def printHelp(username:str, arg:[str]):
     
     return ausgabe
 
-printDate("", ["10.02.2015", ["Thomas", "Silvia", "Tom"], "12:00 - 15:30"])
-printDiceValue("TD", ["2"])
-printFormatError("", ["1"])
-printNoDiceError("", [])
-printHelp("", [])
