@@ -14,6 +14,11 @@ def printDate(username:str, arg:[str]):
     print(ausgabe)
     return ausgabe
 
+def printDateWasCorrect(username:str, arg:[str]):
+    ausgabe = "Eingabe von " + username + " war korrekt."
+
+    return ausgabe
+
 def printFormatError(username:str, arg:[str]):
     ausgabe = "Der Würfel hat an Stelle " + arg[0] + " einen Fehler."
     
@@ -45,6 +50,8 @@ def printHelp(username:str, arg:[str]):
 
     Wenn man vor dem d keine Zahl schreibt, wird von einem Würfel ausgegangen.
     Wenn man hinter dem d keine Zahl schreibt, wird von einem sechseitigem Würfel ausgegangen.
+
+    Man kann auch Ganzzahlen wie z.B. 5 oder 23 eingeben statt einem Würfelelement.
 
     ______________________
     Würfel addieren und subtrahieren:
