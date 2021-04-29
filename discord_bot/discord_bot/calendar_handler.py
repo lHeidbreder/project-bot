@@ -58,9 +58,12 @@ def inputRoutine(msgNAME, msg):
     dzs = msg
     global NAME
     NAME = msgNAME
-    checkTimeInput(dzs)
+    errorCode = checkTimeInput(dzs)
+    if errorCode == 222:
+        return 222, []
     addToDict(NAME, dzs)
     save_dateDictionary()
+    return 200, []
 
 
 def checkWhoIsFreeOn(key):
