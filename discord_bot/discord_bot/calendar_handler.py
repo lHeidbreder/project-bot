@@ -42,7 +42,6 @@ def checkTimeInput(dzs):
 
 def addToDict(NAME, dzs):
     global dateDictionary
-    global NAME
     global date
     global times
     dateDictionary.update({date: {NAME: times}})
