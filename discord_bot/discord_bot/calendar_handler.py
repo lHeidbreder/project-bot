@@ -1,18 +1,17 @@
-#needed: NAME
-#needed: datums- und zeitstring in yyyymmddhhMMhhMM as dzs
-
 import datetime
 import pickle
 from pathlib import Path
 from os import mkdir
 
-dzs = None
+dzs = 2021042914342000
+NAME = Silvia
 dateDictionary = {}
 date = dzs[0:8]
 times = dzs[8:16]
 
 exitCodes = {
     200: "Eingegebenes Datum ist ok.",
+    201: "Eingabe ok.",
     222: "Eingegebenes Datum ist nicht ok.",
     277: "Datum ist nicht im Dictionary. Niemand hat für dieses Datum eine freie Zeit angegeben.",
     288: "Kleinste Endzeit ist früher als späteste Anfangszeit. Keine freie Zeit verfügbar."
@@ -23,7 +22,7 @@ if not saves_path.exists() or not saves_path.is_dir():
     mkdir(saves_path)
 
 
-def checkTimeInput():
+def checkTimeInput(dzs):
     if dzs.isdecimal():
         if datetime.today().year == int(dzs[0:4]):
             if datetime.today().month == int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
@@ -41,9 +40,11 @@ def checkTimeInput():
         return 222
 
 
-def addToDict():
+def addToDict(NAME, dzs):
     global dateDictionary
     global NAME
+    global date
+    global times
     dateDictionary.update({date: {NAME: times}})
 
 
@@ -53,16 +54,24 @@ def save_dateDictionary():
     pickle.dump(dateDictionary, pickled_dateDictionary) #, pickle.HIGHEST_PROTOCOL)
 
 
-def checkWhoIsFreeOn(key):
+def inputRoutine(msgNAME, msg):
+    global dzs
+    dzs = msg
+    global NAME
+    NAME = msgNAME
+    errorCode = checkTimeInput(dzs)
+    if errorCode == 222:
+        return 222, []
+    addToDict(NAME, dzs)
+    save_dateDictionary()
+    return 200, []
+
+
+def checkFreeOn(key):
     global timeDictionary
     freePeople = []
     for el in timeDictionary[key].keys():
         freePeople.append(el)
-    return freePeople
-
-
-def checkFreeTimesOn(key):
-    global timeDictionary
     startTimes = []
     endTimes = []
     for value in timeDictionary[key].values():
@@ -71,8 +80,8 @@ def checkFreeTimesOn(key):
         endTimes.append(value[4:8])
     if key in timeDictionary.keys():
         if min(endTimes) < max(startTimes):
-            return 288
+            return 288, []
         else:
-            return "Free play time from " + max(startTimes) + " to " + min(endTimes) + "."
+            return 201, [freePeople,[max(startTimes), min(endTimes)]]
     else:
-        return 277
+        return 277, []
