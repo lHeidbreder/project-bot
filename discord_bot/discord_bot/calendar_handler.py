@@ -3,8 +3,8 @@ import pickle
 from pathlib import Path
 from os import mkdir
 
-dzs = 2021042914342000
-NAME = Silvia
+dzs = "2021042914342000"
+NAME = "Silvia"
 dateDictionary = {}
 date = dzs[0:8]
 times = dzs[8:16]
@@ -24,15 +24,15 @@ if not saves_path.exists() or not saves_path.is_dir():
 
 def checkTimeInput(dzs):
     if dzs.isdecimal():
-        if datetime.today().year == int(dzs[0:4]):
-            if datetime.today().month == int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
-                if datetime.today().day <= int(dzs[6:8]) and int(dzs[6:8]) <= 31:
+        if datetime.date.today().year == int(dzs[0:4]):
+            if datetime.date.today().month == int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
+                if datetime.date.today().day <= int(dzs[6:8]) and int(dzs[6:8]) <= 31:
                     return 200
             else:
-                if datetime.today().month < int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
+                if datetime.date.today().month < int(dzs[4:6]) and int(dzs[4:6]) <= 12 and int(dzs[6:8]) <= 31:
                     return 200
         else:
-            if datetime.today().year < int(dzs[0:4]) and datetime.today().month >= int(dzs[4:6]) and int(dzs[6:8]) <= 31:
+            if datetime.date.today().year < int(dzs[0:4]) and datetime.date.today().month >= int(dzs[4:6]) and int(dzs[6:8]) <= 31:
                 return 200
             else:
                 return 222
@@ -42,16 +42,15 @@ def checkTimeInput(dzs):
 
 def addToDict(NAME, dzs):
     global dateDictionary
-    global NAME
     global date
     global times
     dateDictionary.update({date: {NAME: times}})
 
 
 def save_dateDictionary():
-  global dateDictionary
-  with open(saves_path / 'dateDictionary.pkl', 'wb') as pickled_dateDictionary:
-    pickle.dump(dateDictionary, pickled_dateDictionary) #, pickle.HIGHEST_PROTOCOL)
+    global dateDictionary
+    with open(saves_path / 'dateDictionary.pkl', 'wb') as pickled_dateDictionary:
+        pickle.dump(dateDictionary, pickled_dateDictionary) #, pickle.HIGHEST_PROTOCOL)
 
 
 def inputRoutine(msgNAME, msg):

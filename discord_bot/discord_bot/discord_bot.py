@@ -1,6 +1,6 @@
 import discord
 from logger import Logger
-import roll_handler, ausgabe#, calendar_handler
+import roll_handler, ausgabe, calendar_handler
 
 client = discord.Client()
 #Logger.default_log_level = Logger.LOG_LEVEL_WARNING
@@ -70,10 +70,22 @@ def roll(message : discord.Message):
     return rtn
 
 def free_request(message : discord.Message):
-    pass
+    rtn = calendar_handler.checkFreeOn(message.content.split(" ",1)[1])
+    if rtn[0] != 200:
+        rtn = message.content + "\n" + calendar_handler.exitCodes[rtn[0]]
+        log.warning(rtn)
+        return message.content + "\n" + calendar_handler.exitCodes[rtn[0]]
+    else:
+        return ausgabe.printDate(message.author,rtn[1])
 
 def free_input(message : discord.Message):
-    pass
+    rtn = calendar_handler.inputRoutine(message.author,message.content.split(" ",1)[1])
+    if rtn[0] != 200:
+        rtn = message.content + "\n" + calendar_handler.exitCodes[rtn[0]]
+        log.warning(rtn)
+        return message.content + "\n" + calendar_handler.exitCodes[rtn[0]]
+    else:
+        return ausgabe.printDateWasCorrect(message.author, rtn[1])
 
 ## SDNAMMOC ##
 
