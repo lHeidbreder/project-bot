@@ -32,36 +32,36 @@ def printNoDiceError(username:str, arg:[str]):
     return ausgabe 
 
 def printHelp(username:str, arg:[str]):
-    ausgabe = """
-    Anleitung:
+    ausgabe = """```
+Anleitung:
 
-    1. Wie erstellt man einen Würfelstring?
-    2. Wie verrechnet man Würfel?
+1. Wie erstellt man einen Würfelstring?
+2. Wie verrechnet man Würfel?
 
-    ______________________
-    Würfelstring erstellen:
+______________________
+Würfelstring erstellen:
 
-    Bsp.: 4d5 3D6-2d10 1d20
-    Ein Würfelstring besteht aus mehreren Würfelelementen.
+Bsp.: 4d5 3D6-2d10 1d20
+Ein Würfelstring besteht aus mehreren Würfelelementen.
 
-    Würfelelement erstellen:
-    Bsp.: 2d6 -> 2x 6er-Würfel
-    
-    Jedes Element muss ein d enthalten. Es egal, ob dass d groß oder klein geschrieben ist.
-    Die Zahl vor dem d ist die Anzahl der Würfel und die Zahl hinter dem d ist die Seitenzahl.
+Würfelelement erstellen:
+Bsp.: 2d6 -> 2x 6er-Würfel
 
-    Wenn man vor dem d keine Zahl schreibt, wird von einem Würfel ausgegangen.
-    Wenn man hinter dem d keine Zahl schreibt, wird von einem sechseitigem Würfel ausgegangen.
+Jedes Element muss ein d enthalten. Es egal, ob dass d groß oder klein geschrieben ist.
+Die Zahl vor dem d ist die Anzahl der Würfel und die Zahl hinter dem d ist die Seitenzahl.
 
-    Man kann auch Ganzzahlen wie z.B. 5 oder 23 eingeben statt einem Würfelelement.
+Wenn man vor dem d keine Zahl schreibt, wird von einem Würfel ausgegangen.
+Wenn man hinter dem d keine Zahl schreibt, wird von einem sechseitigem Würfel ausgegangen.
 
-    ______________________
-    Würfel addieren und subtrahieren:
+Man kann auch Ganzzahlen wie z.B. 5 oder 23 eingeben statt einem Würfelelement.
 
-    Bsp.: 4d d-2d 3d10-3d5
+______________________
+Würfel addieren und subtrahieren:
 
-    Würfel werden addiert, wenn zwei Elemente mit einem Leerzeichen getrennt sind.
-    Würfel werden subtrahiert, wenn zwei Elemente mit einem Minus getrennt sind.
-    """
+Bsp.: 4d d-2d 3d10-3d5
+
+Würfel werden addiert, wenn zwei Elemente mit einem Leerzeichen getrennt sind.
+Würfel werden subtrahiert, wenn zwei Elemente mit einem Minus getrennt sind.
+```"""
     
     return ausgabe

@@ -38,17 +38,16 @@ def change_log_level(message : discord.Message):
 
 def help(message : discord.Message):
     """
-    Note: inactive!
     Outputs the help dialogue for the desired subject.
     """
-    subject = message.content.split(" ", 2)
+    subject = message.content.split(" ", 1)[1]
 
     help_subjects = {
         "roll": ausgabe.printHelp,
         "calendar": None
         }
     try:
-        return help_subjects[subject]
+        return help_subjects[subject](None, None)
     except Exception:
         pass
 
@@ -123,7 +122,7 @@ async def on_message(message : discord.Message):
 
 
 def get_token():
-  TOKEN = "ODM3MjI5Mjg2MzUxOTYyMTQ5.YIpgiA.X9dv62KxiybBf8KyD_EFjrZlSuY"
+  #TOKEN = "Token goes here!"
 #  TOKEN = os.getenv('RNGSUS_TOKEN')
   while TOKEN in ("",None):
     print("RNGSUS_TOKEN was not set in the environment")
