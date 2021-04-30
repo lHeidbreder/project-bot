@@ -124,6 +124,7 @@ async def on_message(message : discord.Message):
 def get_token():
   #TOKEN = "Token goes here!"
 #  TOKEN = os.getenv('RNGSUS_TOKEN')
+
   while TOKEN in ("",None):
     print("RNGSUS_TOKEN was not set in the environment")
     TOKEN = input("Enter your token: ")
