@@ -124,7 +124,7 @@ async def on_message(message : discord.Message):
 
 def get_token():
   TOKEN = "ODM3MjI5Mjg2MzUxOTYyMTQ5.YIpgiA.X9dv62KxiybBf8KyD_EFjrZlSuY" #former, now invalid bot token
-  TOKEN = os.getenv('PROJECT_BOT_TOKEN')
+  #TOKEN = os.getenv('PROJECT_BOT_TOKEN')
   while TOKEN in ("",None):
     print("RNGSUS_TOKEN was not set in the environment")
     TOKEN = input("Enter your token: ")
